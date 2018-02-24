@@ -20,7 +20,7 @@ l1=1.
 Builds graph and Adjacency matrix from input network
 '''
 # inadjacency='../data/'+network+'_adjacency.dat'
-inadjacency='../../../Incesto_accademico/data/'+network+'/output/'+network+'_adjacency.dat'
+inadjacency='../data/'+network+'/output/'+network+'_adjacency.dat'
 
 G=tl.build_graph_from_adjacency(inadjacency)
 
