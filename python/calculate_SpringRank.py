@@ -16,15 +16,14 @@ l0=1.
 l1=1.
 season=list(np.arange(1998,2018))
 
-rank={}
 
 for network in season:
 
-	inadjacency='../WDataFiles/WRegularSeasonCompactResults_'+network+'.csv'
+	inadjacency='../WDataFiles/WRegularSeasonCompactResults_'+str(network)+'.csv'
 
 	G=tl.build_graph_from_adjacency(inadjacency)
 
-	nodes=G.nodes()			#  determines the order of the entries of matrix A
+	nodes=list(G.nodes())			#  determines the order of the entries of matrix A
 
 	A=nx.to_numpy_matrix(G,nodelist=nodes)
 
@@ -32,9 +31,9 @@ for network in season:
 	'''
 	Extracts SpringRank
 	'''
-	rank[network]=sr.SpringRank(A,alpha=alpha,l0=l0,l1=l1)
+	rank=sr.SpringRank(A,alpha=alpha,l0=l0,l1=l1)
 
-	rank[network]=tl.shift_rank(rank)   # shifts so that the min is in zero and the others are positive
+	rank=tl.shift_rank(rank)   # shifts so that the min is in zero and the others are positive
 
 	'''
 	Order results so that the first node is the highest-ranked one
@@ -45,7 +44,7 @@ for network in season:
 	Prints results
 	'''
 	print 'SpringRank scores:'
-	outfile='../WDataFiles/WRegularSeasonCompactResults_'+network+'_SpringRank.csv'
+	outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(network)+'_SpringRank.csv'
 	outf=open(outfile,'w')
 
 	for i in range(G.number_of_nodes()):
