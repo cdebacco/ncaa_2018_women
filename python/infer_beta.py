@@ -26,7 +26,7 @@ for season_id in seasons:
 
 	acc,M=cf.accuracy(season_id,rank_type,beta)
 
-	print(season_id,beta,f,acc,M,file=outf)
+	print(season_id,beta[0],f[0],acc,M,file=outf)
 
 	outf.close()
 
