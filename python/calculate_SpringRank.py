@@ -5,6 +5,7 @@ From a given network, it extracts the SpringRank scores
 
 '''
 
+from __future__ import print_function
 import networkx as nx
 import numpy as np
 import SpringRank_tools as sr
@@ -13,7 +14,7 @@ import tools as tl
 
 alpha=0.
 l0=1.
-l1=1.
+l1=1
 season=list(np.arange(1998,2018))
 
 
@@ -43,14 +44,14 @@ for network in season:
 	'''
 	Prints results
 	'''
-	print 'SpringRank scores:'
+	print('SpringRank scores:')
 	outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(network)+'_SpringRank.csv'
 	outf=open(outfile,'w')
 
 	for i in range(G.number_of_nodes()):
-		print >> outf,X[i][0],X[i][1]
-		# print nodes[i],rank[i]
-		print X[i][0],X[i][1]
-	print;	
-	print 'Results saved in:',outfile
+		print(X[i][0],X[i][1],file=outf)
+		# print(nodes[i],rank[i])
+		print(X[i][0],X[i][1])
+	print("");	
+	print('Results saved in:',outfile)
 	outf.close()

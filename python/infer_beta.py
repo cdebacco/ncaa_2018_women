@@ -17,10 +17,10 @@ for season_id in seasons:
 	outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_beta.dat'
 	outf=open(outfile,'w')
 
-	bounds_beta=[(0,1000)]
-	beta0=2.
+	bounds_beta=[(0,10)]
+	beta0=2
 
-	ARGS=(season_id,rank_type,epsilons)
+	ARGS=(season_id,rank_type,epsilon) #epsilon regolarizza perche la loss est logaritmica e non vogliamo divergenze
 
 	beta,f,d=opt.fmin_l_bfgs_b(cf.evaluation, beta0, fprime=None, args=ARGS, approx_grad=1, bounds=bounds_beta, epsilon=1e-06, iprint=0,callback=None) 
 

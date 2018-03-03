@@ -4,6 +4,8 @@ Function needed to be optimized for final evaluation
 import pandas as pd
 import numpy as np
 
+thresbig=1e6
+
 def evaluation(beta,*ARGS):
 
     L=0.;   # Initial cost function
@@ -29,7 +31,10 @@ def evaluation(beta,*ARGS):
     
     print(-L/float(M),beta)
 
-    return -L/float(M)
+    outvalue=L/float(M)
+    if outvalue>thresbig: raise SystemExit("Loss is bigger than admitted threshold: L = "+str(outvalue)+" > "+str(thresbig))
+
+    return outvalue
 
 
 
