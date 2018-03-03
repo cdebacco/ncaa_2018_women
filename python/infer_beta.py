@@ -9,6 +9,7 @@ import cost_function as cf
 seasons=list(range(1998,2018))
 rank_type='SpringRank'
 epsilon=0.00001
+losstype='train' # we use the train set to calculate the best beta
 
 # ---------------------- Cycle over Parameters -------------------
 
@@ -20,7 +21,7 @@ for season_id in seasons:
 	bounds_beta=[(0,10)]
 	beta0=2
 
-	ARGS=(season_id,rank_type,epsilon) #epsilon regolarizza perche la loss est logaritmica e non vogliamo divergenze
+	ARGS=(season_id,rank_type,epsilon,losstype) #epsilon regolarizza perche la loss est logaritmica e non vogliamo divergenze
 
 	beta,f,d=opt.fmin_l_bfgs_b(cf.evaluation, beta0, fprime=None, args=ARGS, approx_grad=1, bounds=bounds_beta, epsilon=1e-06, iprint=0,callback=None) 
 
