@@ -12,9 +12,12 @@ def evaluation(beta,*ARGS):
     season_id=ARGS[0] # season id
     rank_type=ARGS[1]
     epsilon=ARGS[2]
+    losstype=ARGS[3]
     
     df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'.dat',sep=' ', header=None)
-    df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
+    
+    if losstype=='train':df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
+    elif losstype=='test':df_data=pd.read_csv('../WDataFiles/WTourney_'+str(season_id)+'.csv',sep=' ', header=None)
 
     rank= df_rank.set_index(0).to_dict()[1]
 
