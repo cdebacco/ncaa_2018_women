@@ -13,11 +13,12 @@ def evaluation(beta,*ARGS):
     rank_type=ARGS[1]
     epsilon=ARGS[2]
     losstype=ARGS[3]
+    comparetype=ARGS[4]
     
-    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'.dat',sep=' ', header=None)
+    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'.csv',sep=' ', header=None)
     
     if losstype=='train':df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
-    elif losstype=='test':df_data=pd.read_csv('../WDataFiles/WTourney_'+str(season_id)+'.csv',sep=' ', header=None)
+    elif losstype=='test':df_data=pd.read_csv('../WDataFiles/WNCAATourneyCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
 
     rank= df_rank.set_index(0).to_dict()[1]
 
@@ -41,12 +42,12 @@ def evaluation(beta,*ARGS):
 
 
 
-def accuracy(season_id,rank_type,beta):
+def accuracy(season_id,rank_type,beta,comparetype):
     '''
     Count number of well predicted match outcomes
     '''
     acc=0.
-    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'.dat',sep=' ', header=None)
+    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'.csv',sep=' ', header=None)
     df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
 
     rank= df_rank.set_index(0).to_dict()[1]
@@ -61,3 +62,4 @@ def accuracy(season_id,rank_type,beta):
         if rank[Wteam]>=rank[Lteam]:acc+=1
         
     return acc,M
+

@@ -12,7 +12,7 @@ def build_graph_from_adjacency(inadjacency):
     for row in adjacency_list:
         a=row.split()
         e=(a[0],a[1])
-        w=int(a[2])
+        w=float(a[2])
         if(e not in edges):edges[e]=w
         else:edges[e]+=w
     G=nx.DiGraph()
