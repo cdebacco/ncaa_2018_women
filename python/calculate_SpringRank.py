@@ -10,13 +10,13 @@ import networkx as nx
 import numpy as np
 import SpringRank_tools as sr
 import tools as tl
-
+import parse_points as pp
 
 alpha=0.
 l0=1.
 l1=1
 season=list(np.arange(1998,2018))
-
+gamma=1.
 
 for comparetype in ['min','max','sum','vic']:
 
@@ -25,11 +25,13 @@ for comparetype in ['min','max','sum','vic']:
 
 		inadjacency='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_'+str(comparetype)+'.csv'
 
-		G=tl.build_graph_from_adjacency(inadjacency)
+		A,nodes=pp.compute_comparison_matrix(inadjacency,alpha=gamma)
+		
+		# G=tl.build_graph_from_adjacency(inadjacency)
 
-		nodes=list(G.nodes())			#  determines the order of the entries of matrix A
+		# nodes=list(G.nodes())			#  determines the order of the entries of matrix A
 
-		A=nx.to_numpy_matrix(G,nodelist=nodes)
+		# A=nx.to_numpy_matrix(G,nodelist=nodes)
 
 
 		'''
