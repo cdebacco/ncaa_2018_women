@@ -16,7 +16,7 @@ alpha=0.
 l0=1.
 l1=1
 season=list(np.arange(1998,2018))
-gamma=1.
+gamma=1.0
 
 for comparetype in ['min','max','sum','vic']:
 
@@ -26,7 +26,7 @@ for comparetype in ['min','max','sum','vic']:
 		inadjacency='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_'+str(comparetype)+'.csv'
 
 		A,nodes=pp.compute_comparison_matrix(inadjacency,alpha=gamma)
-		
+
 		# G=tl.build_graph_from_adjacency(inadjacency)
 
 		# nodes=list(G.nodes())			#  determines the order of the entries of matrix A
@@ -50,7 +50,7 @@ for comparetype in ['min','max','sum','vic']:
 		Prints results
 		'''
 		print('SpringRank scores:')
-		outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_SpringRank_'+str(comparetype)+'.csv'
+		outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_SpringRank_'+str(comparetype)+'_g'+str(gamma)+'.csv'
 		outf=open(outfile,'w')
 
 		for i in range(G.number_of_nodes()):
