@@ -16,10 +16,10 @@ def evaluation(beta,*ARGS):
     comparetype=ARGS[4]
     gamma=ARGS[5]
 
-    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'.csv',sep=' ', header=None)
+    df_rank=pd.read_csv('../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'.csv',sep=' ', header=None)
     
-    if losstype=='train':df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
-    elif losstype=='test':df_data=pd.read_csv('../WDataFiles/WNCAATourneyCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
+    if losstype=='train':df_data=pd.read_csv('../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+comparetype+'.csv',sep=' ', header=None)
+    elif losstype=='test':df_data=pd.read_csv('../WDataFiles/WNCAATourneyCompactResults_'+str(season_id)+'_'+comparetype+'.csv',sep=' ', header=None)
 
     rank= df_rank.set_index(0).to_dict()[1]
 
@@ -31,7 +31,7 @@ def evaluation(beta,*ARGS):
         Lteam=rows[1]
 
         p_ij=1./(epsilon+1.+np.exp(-2.*beta*(rank[Wteam]-rank[Lteam])))
-        p_ij=push_to_extreme(p_ij,lmbd=10)
+        p_ij=push_to_extreme(p_ij,lmbd=0)
 
         L-=np.log(p_ij)
     
@@ -49,8 +49,8 @@ def accuracy(season_id,rank_type,beta,comparetype,gamma):
     Count number of well predicted match outcomes
     '''
     acc=0.
-    df_rank=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'.csv',sep=' ', header=None)
-    df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'.csv',sep=' ', header=None)
+    df_rank=pd.read_csv('../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'.csv',sep=' ', header=None)
+    df_data=pd.read_csv('../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+comparetype+'.csv',sep=' ', header=None)
 
     rank= df_rank.set_index(0).to_dict()[1]
 
@@ -66,7 +66,7 @@ def accuracy(season_id,rank_type,beta,comparetype,gamma):
     return acc,M
 
 
-def push_to_extreme(p_ij,lmbd=0,epsilon=0.01):
+def push_to_extreme(p_ij,lmbd=0,epsilon=0.001):
     '''
     Spinge verso gli estremi 0 ed 1 una predizione via di mezzo p_ij circa 0.5
     '''
@@ -75,4 +75,4 @@ def push_to_extreme(p_ij,lmbd=0,epsilon=0.01):
     #     if p_ij<0.5:return 0+epsilon
     #     else: return 1-epsilon
     else:
-        return (np.tanh(p_ij*lmbd-0.5*lmbd)+1)/2.
+        return (np.tanh(p_ij*lmbd-0.5*lmbd)+1)/2.+epsilon

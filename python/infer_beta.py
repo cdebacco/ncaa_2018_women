@@ -6,18 +6,22 @@ from __future__ import print_function
 import scipy.optimize as opt
 import cost_function as cf
 
-seasons=list(range(1998,2018))
+# seasons=list(range(1998,2018))
+seasons=[2018]
+
 rank_type='SpringRank'
 epsilon=0.00001
 losstype='train' # we use the train set to calculate the best beta
 
 # ---------------------- Cycle over Parameters -------------------
 
-for gamma in [1.0, 0, 0.4, 0.7]:
-	for comparetype in ['min','max','sum','vic']:
+for gamma in [0.9]:
+	# for comparetype in ['min','vic','max','sum']:
+	for comparetype in ['vic']:
+
 		for season_id in seasons:
 
-			outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'_beta.dat'
+			outfile='../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'_beta.dat'
 			outf=open(outfile,'w')
 
 			bounds_beta=[(0,10)]

@@ -1,12 +1,15 @@
 #!/usr/bin/python
 
+from __future__ import print_function
 
 import pandas as pd
 import numpy as np
 import cost_function as cf
 import sys
 
-seasons=list(range(1998,2018))
+# seasons=list(range(1998,2018))
+seasons=[2018]
+
 rank_type='SpringRank'
 epsilon=0.00001
 losstype='test'
@@ -15,8 +18,10 @@ if len(sys.argv)==2:
 	beta0=np.float64(sys.argv[1])
 
 
-for gamma in [1.0, 0, 0.4, 0.7]:
-	for comparetype in ['min','max','sum','vic']:
+for gamma in [0.9]:
+	# for comparetype in ['min','max','sum','vic']:
+	for comparetype in ['vic']:
+
 		print('comparetype:',comparetype)
 
 		outname='../WDataFiles/Results/testlosses_'+str(comparetype)+'_g'+str(gamma)+'.txt' if beta0==None else '../WDataFiles/Results/testlosses_beta'+str(beta0)+'_'+str(comparetype)+'_g'+str(gamma)+'.txt'
@@ -32,7 +37,7 @@ for gamma in [1.0, 0, 0.4, 0.7]:
 
 			#Prendiamo beta
 			if beta0==None:
-				df_beta=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'_beta.dat',sep=' ', header=None)
+				df_beta=pd.read_csv('../WDataFiles/RegularSeasonCompactResults_'+str(season_id)+'_'+rank_type+'_'+comparetype+'_g'+str(gamma)+'_beta.dat',sep=' ', header=None)
 				beta=df_beta.iloc[0][1]
 			else: beta=beta0
 

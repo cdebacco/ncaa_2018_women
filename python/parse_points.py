@@ -98,15 +98,16 @@ def pointcompare(points1, points2, overtime, norm='sum', factor=1000	):
 
 if __name__=='__main__':
 
-    df_data=pd.read_csv('../WDataFiles/WRegularSeasonCompactResults.csv')
+    df_data=pd.read_csv('../WDataFiles/RegularSeasonCompactResults.csv')
 
 #    print(df_data['NumOT'])
 
     # df_data['compare']=df_data.apply(pointcompare,args=(df_data['WScore'],df_data['LScore'],df_data['NumOT']))
 
-    for norm in ['sum','max','min','vic']:
+    # for norm in ['sum','max','min','vic']:
+    for norm in ['vic']:
 
-        outf=open('../WDataFiles/WRegularSeasonCompactResults_'+str(norm)+'.csv',"w")
+        outf=open('../WDataFiles/RegularSeasonCompactResults_'+str(norm)+'.csv',"w")
         for idx,line in df_data.iterrows():
             print(
                 line['Season'],
