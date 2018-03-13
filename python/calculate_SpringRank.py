@@ -16,7 +16,7 @@ alpha=0.
 l0=1.
 l1=1
 season=list(np.arange(1998,2018))
-gamma=1.0
+gamma=0.4
 
 for comparetype in ['min','max','sum','vic']:
 

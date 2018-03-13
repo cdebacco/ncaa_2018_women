@@ -64,3 +64,13 @@ def accuracy(season_id,rank_type,beta,comparetype,gamma):
         
     return acc,M
 
+
+def push_to_extreme(p_ij,lmbd=0,epsilon=0.01):
+    '''
+    Spinge verso gli estremi 0 ed 1 una predizione via di mezzo p_ij circa 0.5
+    '''
+    if lmbd==0:
+        if p_ij<0.5:return 0+epsilon
+        else: return 1-epsilon
+    else:
+        return (np.tanh(p_ij*lmbd-0.5*lmbd)+1)/2.
