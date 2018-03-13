@@ -70,7 +70,7 @@ def compute_comparison_matrix(inadjacency,alpha=1):
 
                 S[i,j]+=(1-alpha)*(siq-sjq)/k_len
                 S[j,i]+=(1-alpha)*(sjq-siq)/k_len
-
+    S=np.matrix(S)
     return S,nodes
 
 def pointcompare(points1, points2, overtime, norm='sum', factor=1000):

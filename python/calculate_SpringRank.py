@@ -44,7 +44,7 @@ for comparetype in ['min','max','sum','vic']:
 		'''
 		Order results so that the first node is the highest-ranked one
 		'''
-		X=[(nodes[i],rank[i]) for i in range(G.number_of_nodes())]
+		X=[(nodes[i],rank[i]) for i in range(len(nodes))]
 		X= sorted(X, key=lambda tup: tup[1],reverse=True)
 		'''
 		Prints results
@@ -53,7 +53,7 @@ for comparetype in ['min','max','sum','vic']:
 		outfile='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_SpringRank_'+str(comparetype)+'_g'+str(gamma)+'.csv'
 		outf=open(outfile,'w')
 
-		for i in range(G.number_of_nodes()):
+		for i in range(len(nodes)):
 			print(X[i][0],X[i][1],file=outf)
 			# print(nodes[i],rank[i])
 			print(X[i][0],X[i][1])
