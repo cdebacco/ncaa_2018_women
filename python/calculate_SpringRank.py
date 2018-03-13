@@ -25,14 +25,13 @@ for comparetype in ['min','max','sum','vic']:
 
 		inadjacency='../WDataFiles/WRegularSeasonCompactResults_'+str(seasonID)+'_'+str(comparetype)+'.csv'
 
-		A,nodes=pp.compute_comparison_matrix(inadjacency,alpha=gamma)
+		A,nodes=pp.compute_comparison_matrix(inadjacency,gamma=gamma)
 
 		# G=tl.build_graph_from_adjacency(inadjacency)
 
 		# nodes=list(G.nodes())			#  determines the order of the entries of matrix A
 
 		# A=nx.to_numpy_matrix(G,nodelist=nodes)
-
 
 		'''
 		Extracts SpringRank

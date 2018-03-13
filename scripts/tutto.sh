@@ -35,4 +35,4 @@ python infer_beta.py
 # ../WDataFiles/testlosses.txt
  python test_loss.py
 #Possiamo anche scegliere noi la beta da applicare a tutti gli anni
- python test_loss.py 1.9
+# python test_loss.py 1.9

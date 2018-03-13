@@ -18,12 +18,12 @@ def to_undirected(G):
         else:   UG.add_edge(u,v,weight=G[u][v]['weight'])#+G[v][u]['weight']) 
     return UG
 
-def compute_comparison_matrix(inadjacency,alpha=1):
+def compute_comparison_matrix(inadjacency,gamma=1):
 
     G=tl.build_graph_from_adjacency(inadjacency)
 
     nodes=list(G.nodes(data=False))
-    edges=list(G.edges(data=True))
+    edges=list(G.edges(data=False))
     N=G.number_of_nodes()
     S=np.zeros((N, N))
 
@@ -42,8 +42,8 @@ def compute_comparison_matrix(inadjacency,alpha=1):
                 else:w_uv=0
                 if (v,u) in edges: w_vu=G[v][u]['weight']
                 else:w_vu=0
-                S[i,j]+=w_uv*alpha
-                S[j,i]+=w_vu*alpha
+                S[i,j]+=w_uv*gamma
+                S[j,i]+=w_vu*gamma
 
             '''
             Scontro indiretto (i,k), (j,k)
@@ -68,12 +68,13 @@ def compute_comparison_matrix(inadjacency,alpha=1):
                 siq=(w_uq-w_qu)
                 sjq=(w_vq-w_qv)
 
-                S[i,j]+=(1-alpha)*(siq-sjq)/k_len
-                S[j,i]+=(1-alpha)*(sjq-siq)/k_len
+                S[i,j]+=(1-gamma)*(siq-sjq)/k_len
+                S[j,i]+=(1-gamma)*(sjq-siq)/k_len
+
     S=np.matrix(S)
     return S,nodes
 
-def pointcompare(points1, points2, overtime, norm='sum', factor=1000):
+def pointcompare(points1, points2, overtime, norm='sum', factor=1000	):
     """
     Dal risultato della partita ci da un numero nell'intervallo [0,factor] che usiamo per fare il train
     """
