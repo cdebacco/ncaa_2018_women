@@ -31,6 +31,7 @@ def evaluation(beta,*ARGS):
         Lteam=rows[1]
 
         p_ij=1./(epsilon+1.+np.exp(-2.*beta*(rank[Wteam]-rank[Lteam])))
+        p_ij=push_to_extreme(p_ij,lmbd=10)
 
         L-=np.log(p_ij)
     
@@ -69,8 +70,9 @@ def push_to_extreme(p_ij,lmbd=0,epsilon=0.01):
     '''
     Spinge verso gli estremi 0 ed 1 una predizione via di mezzo p_ij circa 0.5
     '''
-    if lmbd==0:
-        if p_ij<0.5:return 0+epsilon
-        else: return 1-epsilon
+    if lmbd==0:return p_ij
+    # elif lmbd==0:
+    #     if p_ij<0.5:return 0+epsilon
+    #     else: return 1-epsilon
     else:
         return (np.tanh(p_ij*lmbd-0.5*lmbd)+1)/2.
